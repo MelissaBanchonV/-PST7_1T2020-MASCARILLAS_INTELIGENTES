@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Intelimasc</string>
+    <string name="iniciar_sesi_n">Iniciar sesión</string>
+    <string name="usuario">Usuario:</string>
+    <string name="contrase_a">Contraseña:</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="title_activity_menu_principal1">MenuPrincipal1</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuración</string>
+    <string name="action_logout">Cerrar sesión</string>
+
+    <string name="menu_home">Inicio</string>
+    <string name="menu_gallery">Mis mascarillas</string>
+    <string name="menu_slideshow">Administrar mascarillas</string>
+
+    <string name="nombre_usuario">Inicio</string>
+    <string name="correo_usuario">Mascarilla 1</string>
+</resources>
