@@ -1,16 +1,11 @@
 package com.example.proyectopst;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,74 +15,52 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Configuraciones extends AppCompatActivity {
-    CheckBox cbNombre, cbApellido, cbCorreo, cbContraseña;
-    EditText etNombre, etApellido, etCorreo, etContraseña, etContraseña2;
-    String cedula,nombre,apellido,correo,contraseña;
+    CheckBox cbNombre, cbApellido, cbCorreo, cbPass;
+    EditText etNombre, etApellido, etCorreo, etPass, etPass2;
+    String cedula,nombre,apellido,correo, pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuraciones);
+
         cbNombre = (CheckBox)findViewById(R.id.checkBoxNombre);
         cbApellido = (CheckBox)findViewById(R.id.checkBoxApellido);
         cbCorreo = (CheckBox)findViewById(R.id.checkBoxCorreo);
-        cbContraseña = (CheckBox)findViewById(R.id.checkBoxContraseña);
+        cbPass = (CheckBox)findViewById(R.id.checkBoxPass);
 
         etNombre = (EditText)findViewById(R.id.editTextConfNombre);
         etApellido = (EditText)findViewById(R.id.editTextConfApellido);
         etCorreo = (EditText)findViewById(R.id.editTextConfCorreo);
-        etContraseña = (EditText)findViewById(R.id.editTextConfContraseña);
-        etContraseña2 = (EditText)findViewById(R.id.editTextConfContraseña2);
+        etPass = (EditText)findViewById(R.id.editTextConfPass);
+        etPass2 = (EditText)findViewById(R.id.editTextConfPass2);
 
         etNombre.setEnabled(false);
         etApellido.setEnabled(false);
         etCorreo.setEnabled(false);
-        etContraseña.setEnabled(false);
-        etContraseña2.setEnabled(false);
+        etPass.setEnabled(false);
+        etPass2.setEnabled(false);
 
-        cbNombre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    etNombre.setEnabled(true);
-                }
-                else{
-                    etNombre.setEnabled(false);
-                }
-            }
-        });
-
+        incializarCB(cbNombre,etNombre);
+        incializarCB(cbApellido,etApellido);
+        incializarCB(cbCorreo,etCorreo);
         incializarCB(cbApellido,etApellido);
 
-
-        cbCorreo.setOnClickListener(new View.OnClickListener() {
+        cbPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
-                    etCorreo.setEnabled(true);
+                    etPass.setEnabled(true);
+                    etPass2.setEnabled(true);
                 }
                 else{
-                    etCorreo.setEnabled(false);
-                }
-            }
-        });
-
-        cbContraseña.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    etContraseña.setEnabled(true);
-                    etContraseña2.setEnabled(true);
-                }
-                else{
-                    etContraseña.setEnabled(false);
-                    etContraseña2.setEnabled(false);
+                    etPass.setEnabled(false);
+                    etPass2.setEnabled(false);
                 }
             }
         });
@@ -97,9 +70,14 @@ public class Configuraciones extends AppCompatActivity {
         nombre = obtenerDatos.getString("nombre");
         apellido = obtenerDatos.getString("apellido");
         correo = obtenerDatos.getString("correo");
-        contraseña = obtenerDatos.getString("contraseña");
+        pass = obtenerDatos.getString("contraseña");
     }
 
+    /**
+     * Permite al usuario accionar los EditText para llenar el formulario.
+     * @param cb Checkbox a marcar.
+     * @param et EditText que debe activarse.
+     */
     public void incializarCB(CheckBox cb, final EditText et){
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +92,11 @@ public class Configuraciones extends AppCompatActivity {
         });
     }
 
+    /**
+     * Acción del botón que inicializa el método para enviar los datos.
+     * Verifica qué campos han sido modificados y cambia los datos.
+     * @param view
+     */
     public void modificarDatos(View view){
         if (cbNombre.isChecked()) {
             nombre = etNombre.getText().toString();
@@ -127,23 +110,31 @@ public class Configuraciones extends AppCompatActivity {
             correo = etCorreo.getText().toString();
         }
 
-        if (cbContraseña.isChecked()) {
-            if(etContraseña.getText().toString().equals(etContraseña2.getText().toString())){
-                contraseña = etContraseña.getText().toString();
+        if (cbPass.isChecked()) {
+            if(etPass.getText().toString().equals(etPass2.getText().toString())){
+                pass = etPass.getText().toString();
             }else{
                 Toast.makeText(this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
             }
         }
 
-        ejecutarServicio(cedula,nombre,apellido,correo,contraseña);
+        modificarDatos(cedula,nombre,apellido,correo, pass);
         etNombre.setText("");
         etApellido.setText("");
         etCorreo.setText("");
-        etContraseña.setText("");
-        etContraseña2.setText("");
+        etPass.setText("");
+        etPass2.setText("");
     }
 
-    private void ejecutarServicio(final String cedula,final String nombre, final String apellido, final String correo, final String contraseña){
+    /**
+     * Envía la información a la base de datos para actualizarlos.
+     * @param cedula
+     * @param nombre
+     * @param apellido
+     * @param correo
+     * @param pass
+     */
+    private void modificarDatos(final String cedula, final String nombre, final String apellido, final String correo, final String pass){
         StringRequest strRq = new StringRequest(Request.Method.POST,
                 "https://undried-modes.000webhostapp.com/editar_usuario.php",
                 new Response.Listener<String>() {
@@ -164,13 +155,12 @@ public class Configuraciones extends AppCompatActivity {
                 parametros.put("nombre",nombre);
                 parametros.put("apellido",apellido);
                 parametros.put("correo",correo);
-                parametros.put("contraseña",contraseña);
+                parametros.put("pass",pass);
                 return parametros;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(strRq);
-        //Toast.makeText(this, "Cierre sesión para actualizar.", Toast.LENGTH_SHORT).show();
     }
 
     public void regresar(View view){

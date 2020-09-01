@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Registro extends AppCompatActivity {
-    EditText cedula, nombre, apellido, correo, contraseña, contraseñaConf;
+    EditText cedula, nombre, apellido, correo, pass, passConf;
     String usuarioExiste;
 
     @Override
@@ -35,8 +35,8 @@ public class Registro extends AppCompatActivity {
         nombre = (EditText)findViewById(R.id.editTextRegNombre);
         apellido = (EditText)findViewById(R.id.editTextRegApellido);
         correo = (EditText)findViewById(R.id.editTextRegCorreo);
-        contraseña = (EditText)findViewById(R.id.editTextRegContraseña);
-        contraseñaConf = (EditText)findViewById(R.id.editTextRegContraseña2);
+        pass = (EditText)findViewById(R.id.editTextRegPass);
+        passConf = (EditText)findViewById(R.id.editTextRegPass);
     }
 
     /**
@@ -48,8 +48,8 @@ public class Registro extends AppCompatActivity {
         consultaUsuario();
         if ("falso".equals(usuarioExiste)){
             if(cedula.getText().toString().length() == 10 ){
-                if (contraseña.getText().toString().length()>5){
-                    if(contraseña.getText().toString().equals(contraseñaConf.getText().toString())){
+                if (pass.getText().toString().length()>5){
+                    if(pass.getText().toString().equals(passConf.getText().toString())){
                         ejecutarServicio("https://undried-modes.000webhostapp.com/ingreso_usuario.php");
                     }else{
                         Toast.makeText(this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
@@ -86,8 +86,8 @@ public class Registro extends AppCompatActivity {
                 nombre.setText("");
                 apellido.setText("");
                 correo.setText("");
-                contraseña.setText("");
-                contraseñaConf.setText("");
+                pass.setText("");
+                passConf.setText("");
             }
         }, new Response.ErrorListener() {
             @Override
@@ -102,7 +102,7 @@ public class Registro extends AppCompatActivity {
                 parametros.put("nombre",nombre.getText().toString());
                 parametros.put("apellido",apellido.getText().toString());
                 parametros.put("correo",correo.getText().toString());
-                parametros.put("contraseña",contraseña.getText().toString());
+                parametros.put("contraseña", pass.getText().toString());
                 return parametros;
             }
         };

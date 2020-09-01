@@ -2,12 +2,9 @@ package com.example.proyectopst;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -23,7 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 public class MenuPrincipal1 extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     public static String id_usuario;
-    String cedula,nombre,apellido,correo,contraseña;
+    String cedula,nombre,apellido,correo, pass;
 
     /**
      * Se obtienen los datos de inicio de sesión  mediante un bundle y se setean en el nav_view
@@ -42,7 +39,7 @@ public class MenuPrincipal1 extends AppCompatActivity {
         nombre = obtenerDatos.getString("nombre");
         apellido = obtenerDatos.getString("apellido");
         correo = obtenerDatos.getString("correo");
-        contraseña = obtenerDatos.getString("contraseña");
+        pass = obtenerDatos.getString("contraseña");
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -105,7 +102,7 @@ public class MenuPrincipal1 extends AppCompatActivity {
                 conf.putExtra("nombre",nombre);
                 conf.putExtra("apellido",apellido);
                 conf.putExtra("correo",correo);
-                conf.putExtra("contraseña",contraseña);
+                conf.putExtra("contraseña", pass);
                 startActivity(conf);
                 return true;
             case R.id.action_logout:

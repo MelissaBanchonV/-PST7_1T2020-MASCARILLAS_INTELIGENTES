@@ -20,14 +20,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class InicioSesion extends AppCompatActivity {
-    EditText usuario, contraseña;
+    EditText usuario, pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_sesion);
         usuario = (EditText)findViewById(R.id.editTextInicioUsuario);
-        contraseña = (EditText)findViewById(R.id.editTextInicioContraseña);
+        pass = (EditText)findViewById(R.id.editTextInicioPass);
     }
 
     /**
@@ -52,7 +52,7 @@ public class InicioSesion extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        if(contraseña.getText().toString().equals(jsonObject.get("contraseña"))){
+                        if(pass.getText().toString().equals(jsonObject.get("contraseña"))){
                             Intent cambioVentana = new Intent(getApplicationContext(), MenuPrincipal1.class);
                             cambioVentana.putExtra("id_usuario",jsonObject.get("id_usuario").toString());
                             cambioVentana.putExtra("cedula",jsonObject.get("cedula").toString());

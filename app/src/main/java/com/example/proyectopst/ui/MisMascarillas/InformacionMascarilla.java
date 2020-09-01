@@ -39,7 +39,7 @@ public class InformacionMascarilla extends AppCompatActivity {
         titulo.setText("Mascarilla: "+b.getString("Codigo"));
 
         TablaDinamica tablaD = new TablaDinamica(consultaTabla,getApplicationContext());
-        String[] header = new String[]{"Fecha", "Distancia", "Seguro"};
+        String[] header = new String[]{"Fecha", "Distancia [cm]", "Seguro"};
         tablaD.addHeader(header);
         ArrayList<String> datosCompletos = b.getStringArrayList("Info");
         ArrayList<String[]> contenido = new ArrayList<String[]>();
