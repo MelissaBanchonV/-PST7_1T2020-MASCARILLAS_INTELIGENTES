@@ -19,31 +19,53 @@ public class TablaDinamica {
     private int indexC;
     private int indexR;
 
+    /**
+     * Constructor de la clase.
+     * @param tableLayout donde va a estar contenida la tabla.
+     * @param context del activity.
+     */
     public TablaDinamica(TableLayout tableLayout, Context context){
         this.tableLayout = tableLayout;
         this.context = context;
     }
 
+    /**
+     * Crea la cabecera de la tabla.
+     * @param header
+     */
     public void addHeader(String[] header){
         this.header = header;
         createHeader();
     }
 
+    /**
+     * Añade los datos ingresados en el ArrayList.
+     * @param data
+     */
     public void addData(ArrayList<String[]> data){
         this.data = data;
         createDataTable();
     }
 
+    /**
+     * Crea una nueva fila.
+     */
     private void newRow(){
         tableRow = new TableRow(context);
     }
 
+    /**
+     * Crea un nuevo contenedor tipo textView para la celda.
+     */
     private void newCell(){
         txtCell = new TextView(context);
         txtCell.setGravity(Gravity.CENTER);
         txtCell.setTextSize(12);
     }
 
+    /**
+     * Ingresa los datos de la cabecera en la tabla.
+     */
     private void createHeader(){
         indexC = 0;
         newRow();
@@ -56,6 +78,9 @@ public class TablaDinamica {
         tableLayout.addView(tableRow);
     }
 
+    /**
+     * Ingresa los datos del contenido en la tabla.
+     */
     private void createDataTable(){
         for(String[] datos2: data) {
             newRow();
@@ -69,6 +94,10 @@ public class TablaDinamica {
         }
     }
 
+    /**
+     * Setea los márgenes de la tabla.
+     * @return parámetros de la tabla.
+     */
     public TableRow.LayoutParams newTableRowParams(){
         TableRow.LayoutParams params = new TableRow.LayoutParams();
         params.setMargins(1,1,1,1);

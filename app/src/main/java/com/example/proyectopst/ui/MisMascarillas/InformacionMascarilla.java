@@ -17,6 +17,10 @@ public class InformacionMascarilla extends AppCompatActivity {
     TextView titulo;
     private TableLayout consultaTabla;
 
+    /**
+     * Trata la información recibida en un bundle para mostrarla en una ventana emergente.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

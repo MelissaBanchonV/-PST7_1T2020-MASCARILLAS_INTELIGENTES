@@ -39,6 +39,11 @@ public class Registro extends AppCompatActivity {
         contraseñaConf = (EditText)findViewById(R.id.editTextRegContraseña2);
     }
 
+    /**
+     * Acción del botón que registra al usuario, primero comprobando que este no exista en la base de datos.
+     * Llama a la función ejecutarServicio.
+     * @param view
+     */
     public void registrar(View view){
         consultaUsuario();
         if ("falso".equals(usuarioExiste)){
@@ -58,12 +63,20 @@ public class Registro extends AppCompatActivity {
         }
     }
 
+    /**
+     * Acción del botón que finaliza el activity registro y lleva nuevamente al inicio de sesión.
+     * @param view
+     */
     public void regresar(View view){
         Intent inicioSesion = new Intent(this, InicioSesion.class);
         startActivity(inicioSesion);
         finish();
     }
 
+    /**
+     * Función que envía los datos del usuario a la base de datos.
+     * @param URL Correspondiente a la página junto con su archivo .php que contiene el query de insert en la tabla Usuarios.
+     */
     private void ejecutarServicio(String URL){
         StringRequest strRq = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -89,7 +102,6 @@ public class Registro extends AppCompatActivity {
                 parametros.put("nombre",nombre.getText().toString());
                 parametros.put("apellido",apellido.getText().toString());
                 parametros.put("correo",correo.getText().toString());
-                //parametros.put("usuario",usuario.getText().toString());
                 parametros.put("contraseña",contraseña.getText().toString());
                 return parametros;
             }

@@ -21,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -128,8 +129,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="No hay datos para mostrar."
-                    android:textColor="#03036E"
                     android:textAlignment="center"
+                    android:textColor="#03036E"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -143,8 +144,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Mascarillas registradas:"
-                    android:textColor="#3E3D3D"
                     android:textAlignment="center"
+                    android:textColor="#3E3D3D"
                     android:textSize="18sp" />
 
                 <TextView
@@ -158,5 +159,15 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/touchscreen"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/touch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

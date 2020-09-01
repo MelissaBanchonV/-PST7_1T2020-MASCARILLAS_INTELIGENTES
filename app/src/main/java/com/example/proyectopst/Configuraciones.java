@@ -63,7 +63,7 @@ public class Configuraciones extends AppCompatActivity {
             }
         });
 
-        incializarCB(cbApellido);
+        incializarCB(cbApellido,etApellido);
 
 
         cbCorreo.setOnClickListener(new View.OnClickListener() {
@@ -100,15 +100,15 @@ public class Configuraciones extends AppCompatActivity {
         contraseña = obtenerDatos.getString("contraseña");
     }
 
-    public void incializarCB(CheckBox cb){
+    public void incializarCB(CheckBox cb, final EditText et){
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
-                    etApellido.setEnabled(true);
+                    et.setEnabled(true);
                 }
                 else{
-                    etApellido.setEnabled(false);
+                    et.setEnabled(false);
                 }
             }
         });
@@ -170,7 +170,7 @@ public class Configuraciones extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(strRq);
-        Toast.makeText(this, "Cierre sesión para actualizar.", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Cierre sesión para actualizar.", Toast.LENGTH_SHORT).show();
     }
 
     public void regresar(View view){

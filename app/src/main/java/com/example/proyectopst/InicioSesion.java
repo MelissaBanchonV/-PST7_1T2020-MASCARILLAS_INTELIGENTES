@@ -30,11 +30,19 @@ public class InicioSesion extends AppCompatActivity {
         contraseña = (EditText)findViewById(R.id.editTextInicioContraseña);
     }
 
+    /**
+     * Acción del botón que lleva al activity donde se encuentra el formulario de registro
+     * @param view
+     */
     public void registro(View view){
         Intent registrar = new Intent(this,Registro.class);
         startActivity(registrar);
     }
 
+    /**
+     * Acción del botón que consulta en la base de datos los datos del usuario ingresado para comprobar sus credenciales y envía estos datos al activity del Menú principal en caso de tener las credenciales cédula y contraseña correctas.
+     * @param view
+     */
     public void consultaUsuario(View view){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest("https://undried-modes.000webhostapp.com/busqueda_usuario.php?cedula="+usuario.getText(),
                 new Response.Listener<JSONArray>() {
@@ -44,9 +52,6 @@ public class InicioSesion extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        Log.i("USUARIO",jsonObject.get("cedula").toString());
-                        Log.i("CONTRASEÑA_BD",jsonObject.get("contraseña").toString());
-                        Log.i("CONTRASEÑA_ING",contraseña.getText().toString());
                         if(contraseña.getText().toString().equals(jsonObject.get("contraseña"))){
                             Intent cambioVentana = new Intent(getApplicationContext(), MenuPrincipal1.class);
                             cambioVentana.putExtra("id_usuario",jsonObject.get("id_usuario").toString());
@@ -59,11 +64,11 @@ public class InicioSesion extends AppCompatActivity {
                             startActivity(cambioVentana);
                             finish();
                         }else{
-                            Toast.makeText(getApplicationContext(), "Contraseña incorrecta.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Usuario o contraseña incorrecta.", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException je) {
                         Log.e("ERROR_JSON",je.getMessage());
-                        Toast.makeText(getApplicationContext(), "Usuario incorrecto.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Usuario o contraseña incorrecta.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

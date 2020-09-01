@@ -16,6 +16,12 @@ public class Adaptador extends BaseAdapter {
     String[][] datos;
     int cantidad;
 
+    /**
+     * Constructor del adaptador que ingresa los datos de la mascarilla en el layout elemento_lista.
+     * @param contexto Contexto del activity.
+     * @param datos Información que contendrán los elementos de la lista.
+     * @param cantidad Cantidad de datos que se mostrarán.
+     */
     public Adaptador(Context contexto, String[][] datos, int cantidad) {
         this.contexto = contexto;
         this.datos = datos;
@@ -23,6 +29,13 @@ public class Adaptador extends BaseAdapter {
         inflater = (LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
     }
 
+    /**
+     * Ingresa los datos obtenidos en su respectivo contenedor.
+     * @param i
+     * @param view
+     * @param viewGroup
+     * @return
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         final View vista = inflater.inflate(R.layout.elemento_lista, null);
@@ -41,16 +54,30 @@ public class Adaptador extends BaseAdapter {
         return vista;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getCount() {
         return cantidad;
     }
 
+    /**
+     *
+     * @param i
+     * @return
+     */
     @Override
     public Object getItem(int i) {
         return null;
     }
 
+    /**
+     *
+     * @param i
+     * @return
+     */
     @Override
     public long getItemId(int i) {
         return 0;

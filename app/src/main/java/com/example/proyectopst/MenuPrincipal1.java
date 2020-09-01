@@ -25,6 +25,10 @@ public class MenuPrincipal1 extends AppCompatActivity {
     public static String id_usuario;
     String cedula,nombre,apellido,correo,contraseña;
 
+    /**
+     * Se obtienen los datos de inicio de sesión  mediante un bundle y se setean en el nav_view
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,11 @@ public class MenuPrincipal1 extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    /**
+     * Añade los items al action bar si este está presente.
+     * @param menu
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -66,6 +75,10 @@ public class MenuPrincipal1 extends AppCompatActivity {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -73,6 +86,17 @@ public class MenuPrincipal1 extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    /**
+     * Acciones disponibles en el menú:
+     * CONFIGURACIÓN
+     * Acción del botón que inicializa el activity de configuraciones.
+     * Envía los datos actuales del usuario por medio de un bundle.
+     * CERRAR SESIÓN
+     * Acción del botón que inicializa el activity de inicio de sesión.
+     * Finaliza el activity actual.
+     * @param item
+     * @return
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:

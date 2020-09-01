@@ -9,7 +9,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
-    private final int tiemposplas=3000;
+    private final int tiemposplas=500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

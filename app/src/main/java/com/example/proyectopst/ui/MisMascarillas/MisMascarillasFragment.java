@@ -54,6 +54,10 @@ public class MisMascarillasFragment extends Fragment {
         return root;
     }
 
+    /**
+     * Recibe de la base de datos, la información de todas las mascarillas pertenecientes a un usuario para mostrarlas junto con su información correspondiente.
+     * @param mascarillas ListView donde se mostrarán las mascarillas.
+     */
     public void consultaMascarillaUsuario(final ListView mascarillas){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest("https://undried-modes.000webhostapp.com/prueba_busqueda_mascarilla.php?id_usuario="+MenuPrincipal1.id_usuario,
                 new Response.Listener<JSONArray>() {
@@ -83,20 +87,16 @@ public class MisMascarillasFragment extends Fragment {
                             Hashtable<String, Integer> personasyEdades = new Hashtable<String, Integer>();
                             for (int x=0; x < datos_adaptador.length; x++){
                                 int pruebaValor = 0;
-                                Log.e("SEGURO? - ",datos_adaptador[x][1]);
                                 for (Map.Entry<String, Integer> entry : personasyEdades.entrySet()) {
                                     if(entry.getKey().equals(datos_adaptador[x][0])){
                                         pruebaValor = 1;
                                     }
                                 }
                                 for (Map.Entry<String, Integer> entry : personasyEdades.entrySet()) {
-                                    Log.i("CLAVE ",entry.getKey());
-                                    Log.i("VALOR ", String.valueOf(entry.getValue()));
                                 }
                                 if(pruebaValor==1){
                                     if(datos_adaptador[x][1].equals("0")){
                                         int numero = personasyEdades.get(datos_adaptador[x][0]) + 1;
-                                        Log.i("CONTACTO_ENCONTRADO ","sumo uno");
                                         personasyEdades.put(datos_adaptador[x][0], numero);
                                     }
                                 }
@@ -143,6 +143,13 @@ public class MisMascarillasFragment extends Fragment {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Ingresa los datos de las mascarillas en su respectivo ListView.
+     * Determina qué información se va a mostrar cuando se presione sobre una de las mascarillas.
+     * @param datos
+     * @param lista
+     * @param informacionMascarilla
+     */
     public void mostrarMascarillas(final String[][] datos, ListView lista,final ArrayList<String> informacionMascarilla){
         lista.setAdapter(new Adaptador(getContext(), datos,datos.length));
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
